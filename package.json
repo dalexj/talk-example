@@ -1,14 +1,15 @@
 {
   "name": "talk-example",
   "main": "./lib/talk-example",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Evals simple math operations",
-  "activationEvents": ["talk-example:do-math"],
+  "activationEvents": [
+    "talk-example:do-math"
+  ],
   "repository": "https://github.com/dalexj/talk-example",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
