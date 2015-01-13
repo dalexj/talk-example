@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle talk-example'
+      'command': 'talk-example:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'talk-example'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'talk-example:toggle'
+        }
+      ]
+    ]
+  }
+]

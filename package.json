@@ -1,0 +1,16 @@
+{
+  "name": "talk-example",
+  "main": "./lib/talk-example",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "activationCommands": {
+    "atom-workspace": "talk-example:toggle"
+  },
+  "repository": "https://github.com/atom/talk-example",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}
