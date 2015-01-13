@@ -1,33 +1,25 @@
-TalkExampleView = require './talk-example-view'
-{CompositeDisposable} = require 'atom'
+module.exports =
+  activate: ->
+    atom.commands.add 'atom-workspace', "talk-example:do-math", => @doMath()
 
-module.exports = TalkExample =
-  talkExampleView: null
-  modalPanel: null
-  subscriptions: null
+  doMath: ->
+    editor = atom.workspace.getActivePaneItem()
+    selections = editor.getSelections()
+    for selection in selections
+      text = selection.getText()
+      matchData = text.match /^(-*\d+)\s*(\+|-|\*|\/)\s*(-*\d+)$/
+      if matchData
+        numOne = parseFloat(matchData[1])
+        operator = matchData[2]
+        numTwo = parseFloat(matchData[3])
+        selection.insertText(@calc(numOne, numTwo, operator).toString())
 
-  activate: (state) ->
-    @talkExampleView = new TalkExampleView(state.talkExampleViewState)
-    @modalPanel = atom.workspace.addModalPanel(item: @talkExampleView.getElement(), visible: false)
-
-    # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
-    @subscriptions = new CompositeDisposable
-
-    # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'talk-example:toggle': => @toggle()
-
-  deactivate: ->
-    @modalPanel.destroy()
-    @subscriptions.dispose()
-    @talkExampleView.destroy()
-
-  serialize: ->
-    talkExampleViewState: @talkExampleView.serialize()
-
-  toggle: ->
-    console.log 'TalkExample was toggled!'
-
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    else
-      @modalPanel.show()
+  calc: (numOne, numTwo, operator) ->
+    if operator == "+"
+      numOne + numTwo
+    else if operator == "-"
+      numOne - numTwo
+    else if operator == "*"
+      numOne * numTwo
+    else if operator == "/"
+      numOne / numTwo
